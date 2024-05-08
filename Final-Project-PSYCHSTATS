@@ -2,6 +2,8 @@
 > load("~/Downloads/Household_Pulse_data_ph4c2.RData")
 > View(Household_Pulse_data)Household_Pulse_data$INCOME_midpoint <- fct_recode(Household_Pulse_data$INCOME, "12" = "HH income less than $25k", "29" = "HH income $25k - $34.9k", "42" = "HH income $35k - 49.9", "62" = "HH income $50k - 74.9", "87" = "HH income $75 - 99.9", "124" = "HH income $100k - 149", "174" = "HH income $150 - 199", "200" = "HH income $200k +", "0" = "NA") 
 > Household_Pulse_data$INCOME_midpoint <- as.numeric(levels(Household_Pulse_data$INCOME_midpoint))[Household_Pulse_data$INCOME_midpoint]
+
+
 > model_1 <- lm(Household_Pulse_data$INCOME_midpoint ~ Household_Pulse_data$MHLTH_NEED + Household_Pulse_data$MHLTH_GET + Household_Pulse_data$MHLTH_SATISFD + Household_Pulse_data$MHLTH_DIFFCLT)
 > View(model_1)
 > summary(model_1)
@@ -87,6 +89,8 @@ Residual standard error: 65.06 on 71137 degrees of freedom
 Multiple R-squared:  0.03482,	Adjusted R-squared:  0.03463 
 F-statistic: 183.3 on 14 and 71137 DF,  p-value: < 2.2e-16
 
+
+
 > model_2 <- lm(Household_Pulse_data$INCOME_midpoint ~ Household_Pulse_data$ANXIOUS + Household_Pulse_data$WORRY)
 > summary(model_2)
 
@@ -125,3 +129,45 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 Residual standard error: 61.73 on 71143 degrees of freedom
 Multiple R-squared:  0.131,	Adjusted R-squared:  0.1309 
 F-statistic:  1341 on 8 and 71143 DF,  p-value: < 2.2e-16
+
+
+
+> model_3 <- lm(Household_Pulse_data$INCOME_midpoint ~ Household_Pulse_data$INTEREST + Household_Pulse_data$DOWN)
+> summary(model_3)
+
+Call:
+lm(formula = Household_Pulse_data$INCOME_midpoint ~ Household_Pulse_data$INTEREST + 
+    Household_Pulse_data$DOWN)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-90.842 -48.842  -3.842  33.158 198.499 
+
+Coefficients:
+                                                                                  Estimate Std. Error
+(Intercept)                                                                         1.5012     0.8273
+Household_Pulse_data$INTERESTno days in past 2 wks with little interest in things  48.7841     4.5958
+Household_Pulse_data$INTERESTseveral days over past 2 wks                          37.4313     4.6253
+Household_Pulse_data$INTERESTmore than half the days over past 2 wks               28.4911     4.7699
+Household_Pulse_data$INTERESTnearly every day                                      23.1006     4.8463
+Household_Pulse_data$DOWNno days in past 2 wks feeling depressed                   40.5565     4.5832
+Household_Pulse_data$DOWNseveral days over past 2 wks                              35.9878     4.6098
+Household_Pulse_data$DOWNmore than half the days over past 2 wks                   29.0471     4.7704
+Household_Pulse_data$DOWNnearly every day                                          24.5500     4.8338
+                                                                                  t value Pr(>|t|)    
+(Intercept)                                                                         1.815   0.0696 .  
+Household_Pulse_data$INTERESTno days in past 2 wks with little interest in things  10.615  < 2e-16 ***
+Household_Pulse_data$INTERESTseveral days over past 2 wks                           8.093 5.92e-16 ***
+Household_Pulse_data$INTERESTmore than half the days over past 2 wks                5.973 2.34e-09 ***
+Household_Pulse_data$INTERESTnearly every day                                       4.767 1.88e-06 ***
+Household_Pulse_data$DOWNno days in past 2 wks feeling depressed                    8.849  < 2e-16 ***
+Household_Pulse_data$DOWNseveral days over past 2 wks                               7.807 5.95e-15 ***
+Household_Pulse_data$DOWNmore than half the days over past 2 wks                    6.089 1.14e-09 ***
+Household_Pulse_data$DOWNnearly every day                                           5.079 3.81e-07 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 61.55 on 71143 degrees of freedom
+Multiple R-squared:  0.1361,	Adjusted R-squared:  0.136 
+F-statistic:  1401 on 8 and 71143 DF,  p-value: < 2.2e-16
+ 
