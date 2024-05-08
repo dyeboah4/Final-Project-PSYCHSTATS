@@ -171,3 +171,123 @@ Residual standard error: 61.55 on 71143 degrees of freedom
 Multiple R-squared:  0.1361,	Adjusted R-squared:  0.136 
 F-statistic:  1401 on 8 and 71143 DF,  p-value: < 2.2e-16
  
+
+> model_4 <- lm(Household_Pulse_data$INCOME_midpoint ~ Household_Pulse_data$SUPPORT1 + Household_Pulse_data$SUPPORT2 + Household_Pulse_data$SUPPORT3 + Household_Pulse_data$SUPPORT4 + Household_Pulse_data$SUPPORT1EXP)
+> summary(model_4)
+
+Call:
+lm(formula = Household_Pulse_data$INCOME_midpoint ~ Household_Pulse_data$SUPPORT1 + 
+    Household_Pulse_data$SUPPORT2 + Household_Pulse_data$SUPPORT3 + 
+    Household_Pulse_data$SUPPORT4 + Household_Pulse_data$SUPPORT1EXP)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-118.973  -46.140   -3.848   37.507  199.681 
+
+Coefficients:
+                                                                                                   Estimate
+(Intercept)                                                                                          0.3188
+Household_Pulse_data$SUPPORT1talk on phone w family friends neighbors less than once week            7.4929
+Household_Pulse_data$SUPPORT11 or 2 per week                                                         5.5040
+Household_Pulse_data$SUPPORT13 or 4 per week                                                        -3.4675
+Household_Pulse_data$SUPPORT15 + per week                                                           -8.6742
+Household_Pulse_data$SUPPORT2get together w friends or family less than once week                    5.0775
+Household_Pulse_data$SUPPORT21 or 2 per week                                                        13.3325
+Household_Pulse_data$SUPPORT23 or 4 per week                                                         6.5461
+Household_Pulse_data$SUPPORT25 + per week                                                           -0.9093
+Household_Pulse_data$SUPPORT3attend church or religious ceremony never or less than 1 per year      15.2083
+Household_Pulse_data$SUPPORT31 to 3 per year                                                        10.8779
+Household_Pulse_data$SUPPORT34 to 11 per year                                                       12.0992
+Household_Pulse_data$SUPPORT312+ times per year                                                      8.1836
+Household_Pulse_data$SUPPORT4attend clubs or orgs less than once week                               30.0427
+Household_Pulse_data$SUPPORT41 or 2 per week                                                        39.5694
+Household_Pulse_data$SUPPORT43 or 4 per week                                                        34.7946
+Household_Pulse_data$SUPPORT1EXPtext on phone w friends or family or neighbors less than once week  16.1658
+Household_Pulse_data$SUPPORT1EXP1 or 2 per week                                                     24.4525
+Household_Pulse_data$SUPPORT1EXP3 or 4 per week                                                     43.0511
+                                                                                                   Std. Error
+(Intercept)                                                                                            0.7383
+Household_Pulse_data$SUPPORT1talk on phone w family friends neighbors less than once week              4.6597
+Household_Pulse_data$SUPPORT11 or 2 per week                                                           4.6535
+Household_Pulse_data$SUPPORT13 or 4 per week                                                           4.6614
+Household_Pulse_data$SUPPORT15 + per week                                                              4.6553
+Household_Pulse_data$SUPPORT2get together w friends or family less than once week                      4.8068
+Household_Pulse_data$SUPPORT21 or 2 per week                                                           4.8106
+Household_Pulse_data$SUPPORT23 or 4 per week                                                           4.8435
+Household_Pulse_data$SUPPORT25 + per week                                                              4.8769
+Household_Pulse_data$SUPPORT3attend church or religious ceremony never or less than 1 per year         3.9951
+Household_Pulse_data$SUPPORT31 to 3 per year                                                           4.0319
+Household_Pulse_data$SUPPORT34 to 11 per year                                                          4.0893
+Household_Pulse_data$SUPPORT312+ times per year                                                        4.0011
+Household_Pulse_data$SUPPORT4attend clubs or orgs less than once week                                  2.1448
+Household_Pulse_data$SUPPORT41 or 2 per week                                                           2.2085
+Household_Pulse_data$SUPPORT43 or 4 per week                                                           2.4044
+Household_Pulse_data$SUPPORT1EXPtext on phone w friends or family or neighbors less than once week     1.0933
+Household_Pulse_data$SUPPORT1EXP1 or 2 per week                                                        1.0612
+Household_Pulse_data$SUPPORT1EXP3 or 4 per week                                                        0.9610
+                                                                                                   t value
+(Intercept)                                                                                          0.432
+Household_Pulse_data$SUPPORT1talk on phone w family friends neighbors less than once week            1.608
+Household_Pulse_data$SUPPORT11 or 2 per week                                                         1.183
+Household_Pulse_data$SUPPORT13 or 4 per week                                                        -0.744
+Household_Pulse_data$SUPPORT15 + per week                                                           -1.863
+Household_Pulse_data$SUPPORT2get together w friends or family less than once week                    1.056
+Household_Pulse_data$SUPPORT21 or 2 per week                                                         2.771
+Household_Pulse_data$SUPPORT23 or 4 per week                                                         1.352
+Household_Pulse_data$SUPPORT25 + per week                                                           -0.186
+Household_Pulse_data$SUPPORT3attend church or religious ceremony never or less than 1 per year       3.807
+Household_Pulse_data$SUPPORT31 to 3 per year                                                         2.698
+Household_Pulse_data$SUPPORT34 to 11 per year                                                        2.959
+Household_Pulse_data$SUPPORT312+ times per year                                                      2.045
+Household_Pulse_data$SUPPORT4attend clubs or orgs less than once week                               14.007
+Household_Pulse_data$SUPPORT41 or 2 per week                                                        17.917
+Household_Pulse_data$SUPPORT43 or 4 per week                                                        14.471
+Household_Pulse_data$SUPPORT1EXPtext on phone w friends or family or neighbors less than once week  14.787
+Household_Pulse_data$SUPPORT1EXP1 or 2 per week                                                     23.042
+Household_Pulse_data$SUPPORT1EXP3 or 4 per week                                                     44.796
+                                                                                                   Pr(>|t|)
+(Intercept)                                                                                        0.665882
+Household_Pulse_data$SUPPORT1talk on phone w family friends neighbors less than once week          0.107835
+Household_Pulse_data$SUPPORT11 or 2 per week                                                       0.236912
+Household_Pulse_data$SUPPORT13 or 4 per week                                                       0.456949
+Household_Pulse_data$SUPPORT15 + per week                                                          0.062429
+Household_Pulse_data$SUPPORT2get together w friends or family less than once week                  0.290826
+Household_Pulse_data$SUPPORT21 or 2 per week                                                       0.005582
+Household_Pulse_data$SUPPORT23 or 4 per week                                                       0.176531
+Household_Pulse_data$SUPPORT25 + per week                                                          0.852092
+Household_Pulse_data$SUPPORT3attend church or religious ceremony never or less than 1 per year     0.000141
+Household_Pulse_data$SUPPORT31 to 3 per year                                                       0.006977
+Household_Pulse_data$SUPPORT34 to 11 per year                                                      0.003090
+Household_Pulse_data$SUPPORT312+ times per year                                                    0.040824
+Household_Pulse_data$SUPPORT4attend clubs or orgs less than once week                               < 2e-16
+Household_Pulse_data$SUPPORT41 or 2 per week                                                        < 2e-16
+Household_Pulse_data$SUPPORT43 or 4 per week                                                        < 2e-16
+Household_Pulse_data$SUPPORT1EXPtext on phone w friends or family or neighbors less than once week  < 2e-16
+Household_Pulse_data$SUPPORT1EXP1 or 2 per week                                                     < 2e-16
+Household_Pulse_data$SUPPORT1EXP3 or 4 per week                                                     < 2e-16
+                                                                                                      
+(Intercept)                                                                                           
+Household_Pulse_data$SUPPORT1talk on phone w family friends neighbors less than once week             
+Household_Pulse_data$SUPPORT11 or 2 per week                                                          
+Household_Pulse_data$SUPPORT13 or 4 per week                                                          
+Household_Pulse_data$SUPPORT15 + per week                                                          .  
+Household_Pulse_data$SUPPORT2get together w friends or family less than once week                     
+Household_Pulse_data$SUPPORT21 or 2 per week                                                       ** 
+Household_Pulse_data$SUPPORT23 or 4 per week                                                          
+Household_Pulse_data$SUPPORT25 + per week                                                             
+Household_Pulse_data$SUPPORT3attend church or religious ceremony never or less than 1 per year     ***
+Household_Pulse_data$SUPPORT31 to 3 per year                                                       ** 
+Household_Pulse_data$SUPPORT34 to 11 per year                                                      ** 
+Household_Pulse_data$SUPPORT312+ times per year                                                    *  
+Household_Pulse_data$SUPPORT4attend clubs or orgs less than once week                              ***
+Household_Pulse_data$SUPPORT41 or 2 per week                                                       ***
+Household_Pulse_data$SUPPORT43 or 4 per week                                                       ***
+Household_Pulse_data$SUPPORT1EXPtext on phone w friends or family or neighbors less than once week ***
+Household_Pulse_data$SUPPORT1EXP1 or 2 per week                                                    ***
+Household_Pulse_data$SUPPORT1EXP3 or 4 per week                                                    ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 59.72 on 71133 degrees of freedom
+Multiple R-squared:  0.1868,	Adjusted R-squared:  0.1866 
+F-statistic: 907.9 on 18 and 71133 DF,  p-value: < 2.2e-16 
