@@ -1,0 +1,127 @@
+> View(Household_Pulse_data)
+> load("~/Downloads/Household_Pulse_data_ph4c2.RData")
+> View(Household_Pulse_data)Household_Pulse_data$INCOME_midpoint <- fct_recode(Household_Pulse_data$INCOME, "12" = "HH income less than $25k", "29" = "HH income $25k - $34.9k", "42" = "HH income $35k - 49.9", "62" = "HH income $50k - 74.9", "87" = "HH income $75 - 99.9", "124" = "HH income $100k - 149", "174" = "HH income $150 - 199", "200" = "HH income $200k +", "0" = "NA") 
+> Household_Pulse_data$INCOME_midpoint <- as.numeric(levels(Household_Pulse_data$INCOME_midpoint))[Household_Pulse_data$INCOME_midpoint]
+> model_1 <- lm(Household_Pulse_data$INCOME_midpoint ~ Household_Pulse_data$MHLTH_NEED + Household_Pulse_data$MHLTH_GET + Household_Pulse_data$MHLTH_SATISFD + Household_Pulse_data$MHLTH_DIFFCLT)
+> View(model_1)
+> summary(model_1)
+
+Call:
+lm(formula = Household_Pulse_data$INCOME_midpoint ~ Household_Pulse_data$MHLTH_NEED + 
+    Household_Pulse_data$MHLTH_GET + Household_Pulse_data$MHLTH_SATISFD + 
+    Household_Pulse_data$MHLTH_DIFFCLT)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-121.089  -58.419   -8.419   53.581  153.926 
+
+Coefficients:
+                                                                                          Estimate
+(Intercept)                                                                                70.4192
+Household_Pulse_data$MHLTH_NEEDall children need mental health treatment                  -76.1103
+Household_Pulse_data$MHLTH_NEEDsome but not all children                                  -64.2445
+Household_Pulse_data$MHLTH_NEEDno, none of the children                                    26.0845
+Household_Pulse_data$MHLTH_GETall children get the mental health treatment they need       -6.7537
+Household_Pulse_data$MHLTH_GETsome but not all children                                   -41.9086
+Household_Pulse_data$MHLTH_GETno, none of the children                                     -5.7562
+Household_Pulse_data$MHLTH_SATISFDsatisfied with all the mental health treatment they get  31.6299
+Household_Pulse_data$MHLTH_SATISFDsome but not all                                         20.3259
+Household_Pulse_data$MHLTH_SATISFDno, none                                                 23.7763
+Household_Pulse_data$MHLTH_DIFFCLTnot difficult to get kids mental health treatment        69.8976
+Household_Pulse_data$MHLTH_DIFFCLTsomewhat difficult                                       90.0377
+Household_Pulse_data$MHLTH_DIFFCLTvery difficult                                           83.5303
+Household_Pulse_data$MHLTH_DIFFCLTunable to get treatment due to difficulty                77.1902
+Household_Pulse_data$MHLTH_DIFFCLTdid not try to get                                       80.5939
+                                                                                          Std. Error
+(Intercept)                                                                                   0.2861
+Household_Pulse_data$MHLTH_NEEDall children need mental health treatment                     10.1357
+Household_Pulse_data$MHLTH_NEEDsome but not all children                                     10.0579
+Household_Pulse_data$MHLTH_NEEDno, none of the children                                       0.5909
+Household_Pulse_data$MHLTH_GETall children get the mental health treatment they need         22.8110
+Household_Pulse_data$MHLTH_GETsome but not all children                                      22.9874
+Household_Pulse_data$MHLTH_GETno, none of the children                                       16.8963
+Household_Pulse_data$MHLTH_SATISFDsatisfied with all the mental health treatment they get    17.6406
+Household_Pulse_data$MHLTH_SATISFDsome but not all                                           17.7269
+Household_Pulse_data$MHLTH_SATISFDno, none                                                   18.2144
+Household_Pulse_data$MHLTH_DIFFCLTnot difficult to get kids mental health treatment          16.9089
+Household_Pulse_data$MHLTH_DIFFCLTsomewhat difficult                                         16.9298
+Household_Pulse_data$MHLTH_DIFFCLTvery difficult                                             16.9728
+Household_Pulse_data$MHLTH_DIFFCLTunable to get treatment due to difficulty                  17.5986
+Household_Pulse_data$MHLTH_DIFFCLTdid not try to get                                         18.9034
+                                                                                          t value Pr(>|t|)
+(Intercept)                                                                               246.144  < 2e-16
+Household_Pulse_data$MHLTH_NEEDall children need mental health treatment                   -7.509 6.02e-14
+Household_Pulse_data$MHLTH_NEEDsome but not all children                                   -6.387 1.70e-10
+Household_Pulse_data$MHLTH_NEEDno, none of the children                                    44.146  < 2e-16
+Household_Pulse_data$MHLTH_GETall children get the mental health treatment they need       -0.296   0.7672
+Household_Pulse_data$MHLTH_GETsome but not all children                                    -1.823   0.0683
+Household_Pulse_data$MHLTH_GETno, none of the children                                     -0.341   0.7333
+Household_Pulse_data$MHLTH_SATISFDsatisfied with all the mental health treatment they get   1.793   0.0730
+Household_Pulse_data$MHLTH_SATISFDsome but not all                                          1.147   0.2515
+Household_Pulse_data$MHLTH_SATISFDno, none                                                  1.305   0.1918
+Household_Pulse_data$MHLTH_DIFFCLTnot difficult to get kids mental health treatment         4.134 3.57e-05
+Household_Pulse_data$MHLTH_DIFFCLTsomewhat difficult                                        5.318 1.05e-07
+Household_Pulse_data$MHLTH_DIFFCLTvery difficult                                            4.921 8.61e-07
+Household_Pulse_data$MHLTH_DIFFCLTunable to get treatment due to difficulty                 4.386 1.16e-05
+Household_Pulse_data$MHLTH_DIFFCLTdid not try to get                                        4.263 2.02e-05
+                                                                                             
+(Intercept)                                                                               ***
+Household_Pulse_data$MHLTH_NEEDall children need mental health treatment                  ***
+Household_Pulse_data$MHLTH_NEEDsome but not all children                                  ***
+Household_Pulse_data$MHLTH_NEEDno, none of the children                                   ***
+Household_Pulse_data$MHLTH_GETall children get the mental health treatment they need         
+Household_Pulse_data$MHLTH_GETsome but not all children                                   .  
+Household_Pulse_data$MHLTH_GETno, none of the children                                       
+Household_Pulse_data$MHLTH_SATISFDsatisfied with all the mental health treatment they get .  
+Household_Pulse_data$MHLTH_SATISFDsome but not all                                           
+Household_Pulse_data$MHLTH_SATISFDno, none                                                   
+Household_Pulse_data$MHLTH_DIFFCLTnot difficult to get kids mental health treatment       ***
+Household_Pulse_data$MHLTH_DIFFCLTsomewhat difficult                                      ***
+Household_Pulse_data$MHLTH_DIFFCLTvery difficult                                          ***
+Household_Pulse_data$MHLTH_DIFFCLTunable to get treatment due to difficulty               ***
+Household_Pulse_data$MHLTH_DIFFCLTdid not try to get                                      ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 65.06 on 71137 degrees of freedom
+Multiple R-squared:  0.03482,	Adjusted R-squared:  0.03463 
+F-statistic: 183.3 on 14 and 71137 DF,  p-value: < 2.2e-16
+
+> model_2 <- lm(Household_Pulse_data$INCOME_midpoint ~ Household_Pulse_data$ANXIOUS + Household_Pulse_data$WORRY)
+> summary(model_2)
+
+Call:
+lm(formula = Household_Pulse_data$INCOME_midpoint ~ Household_Pulse_data$ANXIOUS + 
+    Household_Pulse_data$WORRY)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-97.823 -45.763  -1.063  36.237 198.937 
+
+Coefficients:
+                                                                            Estimate Std. Error t value
+(Intercept)                                                                   1.0632     0.8355   1.273
+Household_Pulse_data$ANXIOUSno anxiety over past 2 wks                       38.1663     4.0534   9.416
+Household_Pulse_data$ANXIOUSseveral days anxiety over past 2 wks             48.2260     4.0745  11.836
+Household_Pulse_data$ANXIOUSmore than half the days anxiety over past 2 wks  42.2572     4.1954  10.072
+Household_Pulse_data$ANXIOUSnearly every day anxiety                         41.2269     4.2733   9.647
+Household_Pulse_data$WORRYno worry over past 2 wks                           48.5337     4.0190  12.076
+Household_Pulse_data$WORRYseveral days worried over past 2 wks               31.0944     4.0523   7.673
+Household_Pulse_data$WORRYmore than half the days worried over past 2 wks    22.7790     4.2096   5.411
+Household_Pulse_data$WORRYnearly every day worry                             14.7172     4.2841   3.435
+                                                                            Pr(>|t|)    
+(Intercept)                                                                 0.203173    
+Household_Pulse_data$ANXIOUSno anxiety over past 2 wks                       < 2e-16 ***
+Household_Pulse_data$ANXIOUSseveral days anxiety over past 2 wks             < 2e-16 ***
+Household_Pulse_data$ANXIOUSmore than half the days anxiety over past 2 wks  < 2e-16 ***
+Household_Pulse_data$ANXIOUSnearly every day anxiety                         < 2e-16 ***
+Household_Pulse_data$WORRYno worry over past 2 wks                           < 2e-16 ***
+Household_Pulse_data$WORRYseveral days worried over past 2 wks              1.70e-14 ***
+Household_Pulse_data$WORRYmore than half the days worried over past 2 wks   6.28e-08 ***
+Household_Pulse_data$WORRYnearly every day worry                            0.000592 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 61.73 on 71143 degrees of freedom
+Multiple R-squared:  0.131,	Adjusted R-squared:  0.1309 
+F-statistic:  1341 on 8 and 71143 DF,  p-value: < 2.2e-16
