@@ -457,3 +457,7 @@ R2                                                                              
 Adjusted R2                                                                     0.035      0.131     0.136     0.187  
 ======================================================================================================================
 Note:                                                                                      *p<0.1; **p<0.05; ***p<0.01
+
+
+> df <- data.frame(category = c("NA", "Satisfied", "Some", "None"), values = c(">25k", "25k-34.9k", "35k-49.9k", "50k-74.9k", "75k-99k", "100k-149k", "150k-199k", "<200k"))
+> ggplot(df, aes(x = catergory, y = values)) + geom_bar(stat = "identity", fill = "blue") + labs(title = "Bar Plot", x = "Categories", y = "Values") + theme_minimal()
