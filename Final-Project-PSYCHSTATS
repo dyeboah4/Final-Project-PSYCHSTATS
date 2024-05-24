@@ -461,3 +461,10 @@ Note:                                                                           
 
 > df <- data.frame(category = c("NA", "Satisfied", "Some", "None"), values = c(">25k", "25k-34.9k", "35k-49.9k", "50k-74.9k", "75k-99k", "100k-149k", "150k-199k", "<200k"))
 > ggplot(df, aes(x = catergory, y = values)) + geom_bar(stat = "identity", fill = "blue") + labs(title = "Bar Plot", x = "Categories", y = "Values") + theme_minimal()
+
+
+GRAPHS 
+> p_MENTAL <-  ggplot(data = Household_Pulse_data, mapping = aes(x = Household_Pulse_data$ANXIOUS, y = Household_Pulse_data$INCOME_midpoint, color = Household_Pulse_data$INCOME_midpoint, fill = Household_Pulse_data$INCOME_midpoint))
+> p_MENTAL + geom_smooth() 
+
+ p <- ggplot(data = Household_Pulse_data, mapping = aes(x = Household_Pulse_data$MHLTH_SATISFD, y = Household_Pulse_data$INCOME)) + geom_point() + geom_smooth(method = "lm")
