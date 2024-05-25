@@ -468,3 +468,91 @@ GRAPHS
 > p_MENTAL + geom_smooth() 
 
  p <- ggplot(data = Household_Pulse_data, mapping = aes(x = Household_Pulse_data$MHLTH_SATISFD, y = Household_Pulse_data$INCOME)) + geom_point() + geom_smooth(method = "lm")
+
+
+
+
+ xtabs(~Household_Pulse_data$ANXIOUS)
+Household_Pulse_data$ANXIOUS
+                                             NA 
+                                           5480 
+                     no anxiety over past 2 wks 
+                                          37174 
+           several days anxiety over past 2 wks 
+                                          19618 
+more than half the days anxiety over past 2 wks 
+                                           4329 
+                       nearly every day anxiety 
+                                           4551 
+> xtabs(~Household_Pulse_data$ANXIOUS + Household_Pulse_data$INCOME_midpoint)
+                                                 Household_Pulse_data$INCOME_midpoint
+Household_Pulse_data$ANXIOUS                         0   12   29   42   62   87  124  174  200
+  NA                                              5362   27   13    8   20   19   17    8    6
+  no anxiety over past 2 wks                      4280 3101 2668 3436 5339 4394 6040 3308 4608
+  several days anxiety over past 2 wks            1742 2062 1535 1774 2793 2437 3193 1744 2338
+  more than half the days anxiety over past 2 wks  422  692  415  439  622  534  654  249  302
+  nearly every day anxiety                         450  900  525  535  687  460  540  228  226
+> xtabs(~Household_Pulse_data$ANXIOUS + Household_Pulse_data$INCOME)
+                                                 Household_Pulse_data$INCOME
+Household_Pulse_data$ANXIOUS                         1    2    3    4    5    6    7    8    9
+  NA                                              5362   27   13    8   20   19   17    8    6
+  no anxiety over past 2 wks                      4280 3101 2668 3436 5339 4394 6040 3308 4608
+  several days anxiety over past 2 wks            1742 2062 1535 1774 2793 2437 3193 1744 2338
+  more than half the days anxiety over past 2 wks  422  692  415  439  622  534  654  249  302
+  nearly every day anxiety                         450  900  525  535  687  460  540  228  226
+> xtabs(~Household_Pulse_data$WORRY + Household_Pulse_data$INCOME_midpoint)
+                                                 Household_Pulse_data$INCOME_midpoint
+Household_Pulse_data$WORRY                           0   12   29   42   62   87  124  174  200
+  NA                                              5402   42   25   15   24   27   21   12   12
+  no worry over past 2 wks                        4632 3439 2938 3801 6149 5150 7226 4045 5707
+  several days worried over past 2 wks            1505 1921 1422 1565 2254 1923 2341 1153 1425
+  more than half the days worried over past 2 wks  351  575  342  387  503  376  491  167  194
+  nearly every day worry                           366  805  429  424  531  368  365  160  142
+> xtabs(~Household_Pulse_data$DOWN + Household_Pulse_data$INCOME_midpoint)
+                                         Household_Pulse_data$INCOME_midpoint
+Household_Pulse_data$DOWN                    0   12   29   42   62   87  124  174  200
+  NA                                      5421   36   25   19   27   26   22    8   16
+  no days in past 2 wks feeling depressed 4872 3461 2977 3915 6202 5334 7467 4138 5934
+  several days over past 2 wks            1416 2010 1453 1541 2348 1888 2318 1135 1329
+  more than half the days over past 2 wks  262  566  353  353  479  315  364  145  128
+  nearly every day                         285  709  348  364  405  281  273  111   73
+> xtabs(~Household_Pulse_data$INTEREST + Household_Pulse_data$INCOME_midpoint)
+                                                      Household_Pulse_data$INCOME_midpoint
+Household_Pulse_data$INTEREST                             0   12   29   42   62   87  124  174
+  NA                                                   5414   32   19   18   23   21   17   10
+  no days in past 2 wks with little interest in things 4840 3515 3031 3996 6339 5452 7679 4295
+  several days over past 2 wks                         1357 1932 1377 1457 2197 1754 2098  978
+  more than half the days over past 2 wks               341  616  371  368  496  361  402  151
+  nearly every day                                      304  687  358  353  406  256  248  103
+                                                      Household_Pulse_data$INCOME_midpoint
+Household_Pulse_data$INTEREST                           200
+  NA                                                     12
+  no days in past 2 wks with little interest in things 6087
+  several days over past 2 wks                         1159
+  more than half the days over past 2 wks               134
+  nearly every day                                       88
+> levels(Household_Pulse_data$MHLTH_GET)
+[1] "NA"                                                    
+[2] "all children get the mental health treatment they need"
+[3] "some but not all children"                             
+[4] "no, none of the children"                              
+> levels(Household_Pulse_data$MHLTH_SATISFD)
+[1] "NA"                                                     
+[2] "satisfied with all the mental health treatment they get"
+[3] "some but not all"                                       
+[4] "no, none"                                               
+> xtabs(Household_Pulse_data$MHLTH_SATISFD + Household_Pulse_data$INCOME_midpoint)
+Error in formula.default(object, env = baseenv()) : invalid formula
+> xtabs(~Household_Pulse_data$MHLTH_SATISFD + Household_Pulse_data$INCOME_midpoint)
+                                                         Household_Pulse_data$INCOME_midpoint
+Household_Pulse_data$MHLTH_SATISFD                            0    12    29    42    62    87
+  NA                                                      12038  6523  4947  5934  9079  7532
+  satisfied with all the mental health treatment they get   134   168   145   149   245   208
+  some but not all                                           64    80    53    84   108    82
+  no, none                                                   20    11    11    25    29    22
+                                                         Household_Pulse_data$INCOME_midpoint
+Household_Pulse_data$MHLTH_SATISFD                          124   174   200
+  NA                                                       9885  5202  6936
+  satisfied with all the mental health treatment they get   387   241   384
+  some but not all                                          137    75   133
+  no, none                                                   35    19    27
