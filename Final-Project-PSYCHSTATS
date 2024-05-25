@@ -557,8 +557,9 @@ Household_Pulse_data$MHLTH_SATISFD                          124   174   200
   some but not all                                          137    75   133
   no, none                                                   35    19    27
 
-
-barchart <- ggplot(data = Household_Pulse_data, aes(x = Household_Pulse_data$ANXIOUS, y = Household_Pulse_data$INCOME, fill = Household_Pulse_data$ANXIOUS)) +
-       geom_bar(stat = "identity") +
-      labs(title = "Mean Income by Anxiety Level", x = "Anxiety Level", y = "Mean Income") +
-     theme_minimal()
+G R A P H S
+----------------------------------------------------------------
+barchart <- ggplot(data = Household_Pulse_data, aes(x = Household_Pulse_data$ANXIOUS, y = Household_Pulse_data$INCOME_midpoint, fill = Household_Pulse_data$ANXIOUS)) +
++     geom_bar(stat = "identity") +
++     labs(title = "Mean Income by Anxiety Level", x = "Anxiety Level", y = "Mean Income") +
++     theme_minimal()
