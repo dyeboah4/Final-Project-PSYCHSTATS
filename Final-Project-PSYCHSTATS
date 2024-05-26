@@ -5,8 +5,11 @@ Insights from the Household Pulse Data
 > load("~/Downloads/Household_Pulse_data_ph4c2.RData")
 > View(Household_Pulse_data)Household_Pulse_data$INCOME_midpoint <- fct_recode(Household_Pulse_data$INCOME, "12" = "HH income less than $25k", "29" = "HH income $25k - $34.9k", "42" = "HH income $35k - 49.9", "62" = "HH income $50k - 74.9", "87" = "HH income $75 - 99.9", "124" = "HH income $100k - 149", "174" = "HH income $150 - 199", "200" = "HH income $200k +", "0" = "NA") 
 > Household_Pulse_data$INCOME_midpoint <- as.numeric(levels(Household_Pulse_data$INCOME_midpoint))[Household_Pulse_data$INCOME_midpoint]
+> df <- data.frame(category = c("NA", "Satisfied", "Some", "None"), values = c(">25k", "25k-34.9k", "35k-49.9k", "50k-74.9k", "75k-99k", "100k-149k", "150k-199k", "<200k"))
 
-SIMPLE REGRESSION
+
+
+SIMPLE REGRESSIONS
 > model_1 <- lm(Household_Pulse_data$INCOME_midpoint ~ Household_Pulse_data$MHLTH_NEED + Household_Pulse_data$MHLTH_GET + Household_Pulse_data$MHLTH_SATISFD + Household_Pulse_data$MHLTH_DIFFCLT)
 > View(model_1)
 > summary(model_1)
@@ -16,83 +19,6 @@ lm(formula = Household_Pulse_data$INCOME_midpoint ~ Household_Pulse_data$MHLTH_N
     Household_Pulse_data$MHLTH_GET + Household_Pulse_data$MHLTH_SATISFD + 
     Household_Pulse_data$MHLTH_DIFFCLT)
 
-Residuals:
-     Min       1Q   Median       3Q      Max 
--121.089  -58.419   -8.419   53.581  153.926 
-
-Coefficients:
-                                                                                          Estimate
-(Intercept)                                                                                70.4192
-Household_Pulse_data$MHLTH_NEEDall children need mental health treatment                  -76.1103
-Household_Pulse_data$MHLTH_NEEDsome but not all children                                  -64.2445
-Household_Pulse_data$MHLTH_NEEDno, none of the children                                    26.0845
-Household_Pulse_data$MHLTH_GETall children get the mental health treatment they need       -6.7537
-Household_Pulse_data$MHLTH_GETsome but not all children                                   -41.9086
-Household_Pulse_data$MHLTH_GETno, none of the children                                     -5.7562
-Household_Pulse_data$MHLTH_SATISFDsatisfied with all the mental health treatment they get  31.6299
-Household_Pulse_data$MHLTH_SATISFDsome but not all                                         20.3259
-Household_Pulse_data$MHLTH_SATISFDno, none                                                 23.7763
-Household_Pulse_data$MHLTH_DIFFCLTnot difficult to get kids mental health treatment        69.8976
-Household_Pulse_data$MHLTH_DIFFCLTsomewhat difficult                                       90.0377
-Household_Pulse_data$MHLTH_DIFFCLTvery difficult                                           83.5303
-Household_Pulse_data$MHLTH_DIFFCLTunable to get treatment due to difficulty                77.1902
-Household_Pulse_data$MHLTH_DIFFCLTdid not try to get                                       80.5939
-                                                                                          Std. Error
-(Intercept)                                                                                   0.2861
-Household_Pulse_data$MHLTH_NEEDall children need mental health treatment                     10.1357
-Household_Pulse_data$MHLTH_NEEDsome but not all children                                     10.0579
-Household_Pulse_data$MHLTH_NEEDno, none of the children                                       0.5909
-Household_Pulse_data$MHLTH_GETall children get the mental health treatment they need         22.8110
-Household_Pulse_data$MHLTH_GETsome but not all children                                      22.9874
-Household_Pulse_data$MHLTH_GETno, none of the children                                       16.8963
-Household_Pulse_data$MHLTH_SATISFDsatisfied with all the mental health treatment they get    17.6406
-Household_Pulse_data$MHLTH_SATISFDsome but not all                                           17.7269
-Household_Pulse_data$MHLTH_SATISFDno, none                                                   18.2144
-Household_Pulse_data$MHLTH_DIFFCLTnot difficult to get kids mental health treatment          16.9089
-Household_Pulse_data$MHLTH_DIFFCLTsomewhat difficult                                         16.9298
-Household_Pulse_data$MHLTH_DIFFCLTvery difficult                                             16.9728
-Household_Pulse_data$MHLTH_DIFFCLTunable to get treatment due to difficulty                  17.5986
-Household_Pulse_data$MHLTH_DIFFCLTdid not try to get                                         18.9034
-                                                                                          t value Pr(>|t|)
-(Intercept)                                                                               246.144  < 2e-16
-Household_Pulse_data$MHLTH_NEEDall children need mental health treatment                   -7.509 6.02e-14
-Household_Pulse_data$MHLTH_NEEDsome but not all children                                   -6.387 1.70e-10
-Household_Pulse_data$MHLTH_NEEDno, none of the children                                    44.146  < 2e-16
-Household_Pulse_data$MHLTH_GETall children get the mental health treatment they need       -0.296   0.7672
-Household_Pulse_data$MHLTH_GETsome but not all children                                    -1.823   0.0683
-Household_Pulse_data$MHLTH_GETno, none of the children                                     -0.341   0.7333
-Household_Pulse_data$MHLTH_SATISFDsatisfied with all the mental health treatment they get   1.793   0.0730
-Household_Pulse_data$MHLTH_SATISFDsome but not all                                          1.147   0.2515
-Household_Pulse_data$MHLTH_SATISFDno, none                                                  1.305   0.1918
-Household_Pulse_data$MHLTH_DIFFCLTnot difficult to get kids mental health treatment         4.134 3.57e-05
-Household_Pulse_data$MHLTH_DIFFCLTsomewhat difficult                                        5.318 1.05e-07
-Household_Pulse_data$MHLTH_DIFFCLTvery difficult                                            4.921 8.61e-07
-Household_Pulse_data$MHLTH_DIFFCLTunable to get treatment due to difficulty                 4.386 1.16e-05
-Household_Pulse_data$MHLTH_DIFFCLTdid not try to get                                        4.263 2.02e-05
-                                                                                             
-(Intercept)                                                                               ***
-Household_Pulse_data$MHLTH_NEEDall children need mental health treatment                  ***
-Household_Pulse_data$MHLTH_NEEDsome but not all children                                  ***
-Household_Pulse_data$MHLTH_NEEDno, none of the children                                   ***
-Household_Pulse_data$MHLTH_GETall children get the mental health treatment they need         
-Household_Pulse_data$MHLTH_GETsome but not all children                                   .  
-Household_Pulse_data$MHLTH_GETno, none of the children                                       
-Household_Pulse_data$MHLTH_SATISFDsatisfied with all the mental health treatment they get .  
-Household_Pulse_data$MHLTH_SATISFDsome but not all                                           
-Household_Pulse_data$MHLTH_SATISFDno, none                                                   
-Household_Pulse_data$MHLTH_DIFFCLTnot difficult to get kids mental health treatment       ***
-Household_Pulse_data$MHLTH_DIFFCLTsomewhat difficult                                      ***
-Household_Pulse_data$MHLTH_DIFFCLTvery difficult                                          ***
-Household_Pulse_data$MHLTH_DIFFCLTunable to get treatment due to difficulty               ***
-Household_Pulse_data$MHLTH_DIFFCLTdid not try to get                                      ***
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 65.06 on 71137 degrees of freedom
-Multiple R-squared:  0.03482,	Adjusted R-squared:  0.03463 
-F-statistic: 183.3 on 14 and 71137 DF,  p-value: < 2.2e-16
-
-
 
 > model_2 <- lm(Household_Pulse_data$INCOME_midpoint ~ Household_Pulse_data$ANXIOUS + Household_Pulse_data$WORRY)
 > summary(model_2)
@@ -100,39 +26,6 @@ F-statistic: 183.3 on 14 and 71137 DF,  p-value: < 2.2e-16
 Call:
 lm(formula = Household_Pulse_data$INCOME_midpoint ~ Household_Pulse_data$ANXIOUS + 
     Household_Pulse_data$WORRY)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--97.823 -45.763  -1.063  36.237 198.937 
-
-Coefficients:
-                                                                            Estimate Std. Error t value
-(Intercept)                                                                   1.0632     0.8355   1.273
-Household_Pulse_data$ANXIOUSno anxiety over past 2 wks                       38.1663     4.0534   9.416
-Household_Pulse_data$ANXIOUSseveral days anxiety over past 2 wks             48.2260     4.0745  11.836
-Household_Pulse_data$ANXIOUSmore than half the days anxiety over past 2 wks  42.2572     4.1954  10.072
-Household_Pulse_data$ANXIOUSnearly every day anxiety                         41.2269     4.2733   9.647
-Household_Pulse_data$WORRYno worry over past 2 wks                           48.5337     4.0190  12.076
-Household_Pulse_data$WORRYseveral days worried over past 2 wks               31.0944     4.0523   7.673
-Household_Pulse_data$WORRYmore than half the days worried over past 2 wks    22.7790     4.2096   5.411
-Household_Pulse_data$WORRYnearly every day worry                             14.7172     4.2841   3.435
-                                                                            Pr(>|t|)    
-(Intercept)                                                                 0.203173    
-Household_Pulse_data$ANXIOUSno anxiety over past 2 wks                       < 2e-16 ***
-Household_Pulse_data$ANXIOUSseveral days anxiety over past 2 wks             < 2e-16 ***
-Household_Pulse_data$ANXIOUSmore than half the days anxiety over past 2 wks  < 2e-16 ***
-Household_Pulse_data$ANXIOUSnearly every day anxiety                         < 2e-16 ***
-Household_Pulse_data$WORRYno worry over past 2 wks                           < 2e-16 ***
-Household_Pulse_data$WORRYseveral days worried over past 2 wks              1.70e-14 ***
-Household_Pulse_data$WORRYmore than half the days worried over past 2 wks   6.28e-08 ***
-Household_Pulse_data$WORRYnearly every day worry                            0.000592 ***
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 61.73 on 71143 degrees of freedom
-Multiple R-squared:  0.131,	Adjusted R-squared:  0.1309 
-F-statistic:  1341 on 8 and 71143 DF,  p-value: < 2.2e-16
-
 
 
 > model_3 <- lm(Household_Pulse_data$INCOME_midpoint ~ Household_Pulse_data$INTEREST + Household_Pulse_data$DOWN)
@@ -142,38 +35,7 @@ Call:
 lm(formula = Household_Pulse_data$INCOME_midpoint ~ Household_Pulse_data$INTEREST + 
     Household_Pulse_data$DOWN)
 
-Residuals:
-    Min      1Q  Median      3Q     Max 
--90.842 -48.842  -3.842  33.158 198.499 
 
-Coefficients:
-                                                                                  Estimate Std. Error
-(Intercept)                                                                         1.5012     0.8273
-Household_Pulse_data$INTERESTno days in past 2 wks with little interest in things  48.7841     4.5958
-Household_Pulse_data$INTERESTseveral days over past 2 wks                          37.4313     4.6253
-Household_Pulse_data$INTERESTmore than half the days over past 2 wks               28.4911     4.7699
-Household_Pulse_data$INTERESTnearly every day                                      23.1006     4.8463
-Household_Pulse_data$DOWNno days in past 2 wks feeling depressed                   40.5565     4.5832
-Household_Pulse_data$DOWNseveral days over past 2 wks                              35.9878     4.6098
-Household_Pulse_data$DOWNmore than half the days over past 2 wks                   29.0471     4.7704
-Household_Pulse_data$DOWNnearly every day                                          24.5500     4.8338
-                                                                                  t value Pr(>|t|)    
-(Intercept)                                                                         1.815   0.0696 .  
-Household_Pulse_data$INTERESTno days in past 2 wks with little interest in things  10.615  < 2e-16 ***
-Household_Pulse_data$INTERESTseveral days over past 2 wks                           8.093 5.92e-16 ***
-Household_Pulse_data$INTERESTmore than half the days over past 2 wks                5.973 2.34e-09 ***
-Household_Pulse_data$INTERESTnearly every day                                       4.767 1.88e-06 ***
-Household_Pulse_data$DOWNno days in past 2 wks feeling depressed                    8.849  < 2e-16 ***
-Household_Pulse_data$DOWNseveral days over past 2 wks                               7.807 5.95e-15 ***
-Household_Pulse_data$DOWNmore than half the days over past 2 wks                    6.089 1.14e-09 ***
-Household_Pulse_data$DOWNnearly every day                                           5.079 3.81e-07 ***
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 61.55 on 71143 degrees of freedom
-Multiple R-squared:  0.1361,	Adjusted R-squared:  0.136 
-F-statistic:  1401 on 8 and 71143 DF,  p-value: < 2.2e-16
- 
 
 > model_4 <- lm(Household_Pulse_data$INCOME_midpoint ~ Household_Pulse_data$SUPPORT1 + Household_Pulse_data$SUPPORT2 + Household_Pulse_data$SUPPORT3 + Household_Pulse_data$SUPPORT4 + Household_Pulse_data$SUPPORT1EXP)
 > summary(model_4)
@@ -183,117 +45,9 @@ lm(formula = Household_Pulse_data$INCOME_midpoint ~ Household_Pulse_data$SUPPORT
     Household_Pulse_data$SUPPORT2 + Household_Pulse_data$SUPPORT3 + 
     Household_Pulse_data$SUPPORT4 + Household_Pulse_data$SUPPORT1EXP)
 
-Residuals:
-     Min       1Q   Median       3Q      Max 
--118.973  -46.140   -3.848   37.507  199.681 
 
-Coefficients:
-                                                                                                   Estimate
-(Intercept)                                                                                          0.3188
-Household_Pulse_data$SUPPORT1talk on phone w family friends neighbors less than once week            7.4929
-Household_Pulse_data$SUPPORT11 or 2 per week                                                         5.5040
-Household_Pulse_data$SUPPORT13 or 4 per week                                                        -3.4675
-Household_Pulse_data$SUPPORT15 + per week                                                           -8.6742
-Household_Pulse_data$SUPPORT2get together w friends or family less than once week                    5.0775
-Household_Pulse_data$SUPPORT21 or 2 per week                                                        13.3325
-Household_Pulse_data$SUPPORT23 or 4 per week                                                         6.5461
-Household_Pulse_data$SUPPORT25 + per week                                                           -0.9093
-Household_Pulse_data$SUPPORT3attend church or religious ceremony never or less than 1 per year      15.2083
-Household_Pulse_data$SUPPORT31 to 3 per year                                                        10.8779
-Household_Pulse_data$SUPPORT34 to 11 per year                                                       12.0992
-Household_Pulse_data$SUPPORT312+ times per year                                                      8.1836
-Household_Pulse_data$SUPPORT4attend clubs or orgs less than once week                               30.0427
-Household_Pulse_data$SUPPORT41 or 2 per week                                                        39.5694
-Household_Pulse_data$SUPPORT43 or 4 per week                                                        34.7946
-Household_Pulse_data$SUPPORT1EXPtext on phone w friends or family or neighbors less than once week  16.1658
-Household_Pulse_data$SUPPORT1EXP1 or 2 per week                                                     24.4525
-Household_Pulse_data$SUPPORT1EXP3 or 4 per week                                                     43.0511
-                                                                                                   Std. Error
-(Intercept)                                                                                            0.7383
-Household_Pulse_data$SUPPORT1talk on phone w family friends neighbors less than once week              4.6597
-Household_Pulse_data$SUPPORT11 or 2 per week                                                           4.6535
-Household_Pulse_data$SUPPORT13 or 4 per week                                                           4.6614
-Household_Pulse_data$SUPPORT15 + per week                                                              4.6553
-Household_Pulse_data$SUPPORT2get together w friends or family less than once week                      4.8068
-Household_Pulse_data$SUPPORT21 or 2 per week                                                           4.8106
-Household_Pulse_data$SUPPORT23 or 4 per week                                                           4.8435
-Household_Pulse_data$SUPPORT25 + per week                                                              4.8769
-Household_Pulse_data$SUPPORT3attend church or religious ceremony never or less than 1 per year         3.9951
-Household_Pulse_data$SUPPORT31 to 3 per year                                                           4.0319
-Household_Pulse_data$SUPPORT34 to 11 per year                                                          4.0893
-Household_Pulse_data$SUPPORT312+ times per year                                                        4.0011
-Household_Pulse_data$SUPPORT4attend clubs or orgs less than once week                                  2.1448
-Household_Pulse_data$SUPPORT41 or 2 per week                                                           2.2085
-Household_Pulse_data$SUPPORT43 or 4 per week                                                           2.4044
-Household_Pulse_data$SUPPORT1EXPtext on phone w friends or family or neighbors less than once week     1.0933
-Household_Pulse_data$SUPPORT1EXP1 or 2 per week                                                        1.0612
-Household_Pulse_data$SUPPORT1EXP3 or 4 per week                                                        0.9610
-                                                                                                   t value
-(Intercept)                                                                                          0.432
-Household_Pulse_data$SUPPORT1talk on phone w family friends neighbors less than once week            1.608
-Household_Pulse_data$SUPPORT11 or 2 per week                                                         1.183
-Household_Pulse_data$SUPPORT13 or 4 per week                                                        -0.744
-Household_Pulse_data$SUPPORT15 + per week                                                           -1.863
-Household_Pulse_data$SUPPORT2get together w friends or family less than once week                    1.056
-Household_Pulse_data$SUPPORT21 or 2 per week                                                         2.771
-Household_Pulse_data$SUPPORT23 or 4 per week                                                         1.352
-Household_Pulse_data$SUPPORT25 + per week                                                           -0.186
-Household_Pulse_data$SUPPORT3attend church or religious ceremony never or less than 1 per year       3.807
-Household_Pulse_data$SUPPORT31 to 3 per year                                                         2.698
-Household_Pulse_data$SUPPORT34 to 11 per year                                                        2.959
-Household_Pulse_data$SUPPORT312+ times per year                                                      2.045
-Household_Pulse_data$SUPPORT4attend clubs or orgs less than once week                               14.007
-Household_Pulse_data$SUPPORT41 or 2 per week                                                        17.917
-Household_Pulse_data$SUPPORT43 or 4 per week                                                        14.471
-Household_Pulse_data$SUPPORT1EXPtext on phone w friends or family or neighbors less than once week  14.787
-Household_Pulse_data$SUPPORT1EXP1 or 2 per week                                                     23.042
-Household_Pulse_data$SUPPORT1EXP3 or 4 per week                                                     44.796
-                                                                                                   Pr(>|t|)
-(Intercept)                                                                                        0.665882
-Household_Pulse_data$SUPPORT1talk on phone w family friends neighbors less than once week          0.107835
-Household_Pulse_data$SUPPORT11 or 2 per week                                                       0.236912
-Household_Pulse_data$SUPPORT13 or 4 per week                                                       0.456949
-Household_Pulse_data$SUPPORT15 + per week                                                          0.062429
-Household_Pulse_data$SUPPORT2get together w friends or family less than once week                  0.290826
-Household_Pulse_data$SUPPORT21 or 2 per week                                                       0.005582
-Household_Pulse_data$SUPPORT23 or 4 per week                                                       0.176531
-Household_Pulse_data$SUPPORT25 + per week                                                          0.852092
-Household_Pulse_data$SUPPORT3attend church or religious ceremony never or less than 1 per year     0.000141
-Household_Pulse_data$SUPPORT31 to 3 per year                                                       0.006977
-Household_Pulse_data$SUPPORT34 to 11 per year                                                      0.003090
-Household_Pulse_data$SUPPORT312+ times per year                                                    0.040824
-Household_Pulse_data$SUPPORT4attend clubs or orgs less than once week                               < 2e-16
-Household_Pulse_data$SUPPORT41 or 2 per week                                                        < 2e-16
-Household_Pulse_data$SUPPORT43 or 4 per week                                                        < 2e-16
-Household_Pulse_data$SUPPORT1EXPtext on phone w friends or family or neighbors less than once week  < 2e-16
-Household_Pulse_data$SUPPORT1EXP1 or 2 per week                                                     < 2e-16
-Household_Pulse_data$SUPPORT1EXP3 or 4 per week                                                     < 2e-16
-                                                                                                      
-(Intercept)                                                                                           
-Household_Pulse_data$SUPPORT1talk on phone w family friends neighbors less than once week             
-Household_Pulse_data$SUPPORT11 or 2 per week                                                          
-Household_Pulse_data$SUPPORT13 or 4 per week                                                          
-Household_Pulse_data$SUPPORT15 + per week                                                          .  
-Household_Pulse_data$SUPPORT2get together w friends or family less than once week                     
-Household_Pulse_data$SUPPORT21 or 2 per week                                                       ** 
-Household_Pulse_data$SUPPORT23 or 4 per week                                                          
-Household_Pulse_data$SUPPORT25 + per week                                                             
-Household_Pulse_data$SUPPORT3attend church or religious ceremony never or less than 1 per year     ***
-Household_Pulse_data$SUPPORT31 to 3 per year                                                       ** 
-Household_Pulse_data$SUPPORT34 to 11 per year                                                      ** 
-Household_Pulse_data$SUPPORT312+ times per year                                                    *  
-Household_Pulse_data$SUPPORT4attend clubs or orgs less than once week                              ***
-Household_Pulse_data$SUPPORT41 or 2 per week                                                       ***
-Household_Pulse_data$SUPPORT43 or 4 per week                                                       ***
-Household_Pulse_data$SUPPORT1EXPtext on phone w friends or family or neighbors less than once week ***
-Household_Pulse_data$SUPPORT1EXP1 or 2 per week                                                    ***
-Household_Pulse_data$SUPPORT1EXP3 or 4 per week                                                    ***
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 59.72 on 71133 degrees of freedom
-Multiple R-squared:  0.1868,	Adjusted R-squared:  0.1866 
-F-statistic: 907.9 on 18 and 71133 DF,  p-value: < 2.2e-16 
+
 
 
 COMPLEX REGRESSIONS 
@@ -303,420 +57,26 @@ stargazer(model_2, type = "text", title = "Regression Results for Anxiety and De
 
 Regression Results for Anxiety and Depression
 ================================================================================
-                                                         Dependent variable:    
-                                                     ---------------------------
-                                                            Income Level        
---------------------------------------------------------------------------------
-Anxiety                                                       38.166***         
-                                                               (4.053)          
-                                                                                
-Depression                                                    48.226***         
-                                                               (4.075)          
-                                                                                
-Income                                                        42.257***         
-                                                               (4.195)          
-                                                                                
-ANXIOUSnearly every day anxiety                               41.227***         
-                                                               (4.273)          
-                                                                                
-WORRYno worry over past 2 wks                                 48.534***         
-                                                               (4.019)          
-                                                                                
-WORRYseveral days worried over past 2 wks                     31.094***         
-                                                               (4.052)          
-                                                                                
-WORRYmore than half the days worried over past 2 wks          22.779***         
-                                                               (4.210)          
-                                                                                
-WORRYnearly every day worry                                   14.717***         
-                                                               (4.284)          
-                                                                                
-Constant                                                        1.063           
-                                                               (0.835)          
-                                                                                
---------------------------------------------------------------------------------
-Observations                                                   71,152           
-R2                                                              0.131           
-Adjusted R2                                                     0.131           
-================================================================================
-Note:                                                *p<0.1; **p<0.05; ***p<0.01
+
 > stargazer(model_2, type = "text", title = "Regression Results for Anxiety and Depression", dep.var.labels = "Income Level", covariate.labels = c("Anxiety", "Depression"), omit.stat =c("f", "ser"), align = TRUE)
 
 Regression Results for Anxiety and Depression
 ==================================================================================
-                                                           Dependent variable:    
-                                                       ---------------------------
-                                                              Income Level        
-----------------------------------------------------------------------------------
-Anxiety                                                         38.166***         
-                                                                 (4.053)          
-                                                                                  
-Depression                                                      48.226***         
-                                                                 (4.075)          
-                                                                                  
-ANXIOUSmore than half the days anxiety over past 2 wks          42.257***         
-                                                                 (4.195)          
-                                                                                  
-ANXIOUSnearly every day anxiety                                 41.227***         
-                                                                 (4.273)          
-                                                                                  
-WORRYno worry over past 2 wks                                   48.534***         
-                                                                 (4.019)          
-                                                                                  
-WORRYseveral days worried over past 2 wks                       31.094***         
-                                                                 (4.052)          
-                                                                                  
-WORRYmore than half the days worried over past 2 wks            22.779***         
-                                                                 (4.210)          
-                                                                                  
-WORRYnearly every day worry                                     14.717***         
-                                                                 (4.284)          
-                                                                                  
-Constant                                                          1.063           
-                                                                 (0.835)          
-                                                                                  
-----------------------------------------------------------------------------------
-Observations                                                     71,152           
-R2                                                                0.131           
-Adjusted R2                                                       0.131           
-==================================================================================
-Note:                                                  *p<0.1; **p<0.05; ***p<0.01
-> levels(Household_Pulse_data$SUPPORT1)
-[1] "NA"                                                          
-[2] "talk on phone w family friends neighbors less than once week"
-[3] "1 or 2 per week"                                             
-[4] "3 or 4 per week"                                             
-[5] "5 + per week"                                                
-> Levels(Household_Pulse_data$SOCIAL1)
-Error in Levels(Household_Pulse_data$SOCIAL1) : 
-  could not find function "Levels"
-> levels(Household_Pulse_data$SOCIAL1)
-[1] "NA"                                  "always get social emotional support"
-[3] "usually"                             "sometimes"                          
-[5] "rarely"                              "never"                              
-> levels(Household_Pulse_data$SUPPORT2)
-[1] "NA"                                                  
-[2] "get together w friends or family less than once week"
-[3] "1 or 2 per week"                                     
-[4] "3 or 4 per week"                                     
-[5] "5 + per week"                                        
-> levels(Household_Pulse_data$SUPPORT3)
-[1] "NA"                                                               
-[2] "attend church or religious ceremony never or less than 1 per year"
-[3] "1 to 3 per year"                                                  
-[4] "4 to 11 per year"                                                 
-[5] "12+ times per year"                                               
-> levels(Household_Pulse_data$SUPPORT4)
-[1] "NA"                                       "attend clubs or orgs less than once week"
-[3] "1 or 2 per week"                          "3 or 4 per week"                         
-> levels(Household_Pulse_data$SUPPORT1EXP)
-[1] "NA"                                                                
-[2] "text on phone w friends or family or neighbors less than once week"
-[3] "1 or 2 per week"                                                   
-[4] "3 or 4 per week"                                                   
-[5] "5 + per week"                                                      
+                                                      
 > stargazer(model_4, type = "text", title = "Regression Results for Social Supports", dep.var.labels = "Income Level", covariate.labels = c("Enotional Support", "Friends and Family", "Religion", "Clubs", "Text on phone"), omit.stat = c("f", "ser"), align = TRUE) 
 
 Regression Results for Social Supports
-=========================================================================================================
-                                                                                  Dependent variable:    
-                                                                              ---------------------------
-                                                                                     Income Level        
----------------------------------------------------------------------------------------------------------
-Enotional Support                                                                        7.493           
-                                                                                        (4.660)          
-                                                                                                         
-Friends and Family                                                                       5.504           
-                                                                                        (4.654)          
-                                                                                                         
-Religion                                                                                -3.468           
-                                                                                        (4.661)          
-                                                                                                         
-Clubs                                                                                   -8.674*          
-                                                                                        (4.655)          
-                                                                                                         
-Text on phone                                                                            5.078           
-                                                                                        (4.807)          
-                                                                                                         
-SUPPORT21 or 2 per week                                                                13.333***         
-                                                                                        (4.811)          
-                                                                                                         
-SUPPORT23 or 4 per week                                                                  6.546           
-                                                                                        (4.844)          
-                                                                                                         
-SUPPORT25 + per week                                                                    -0.909           
-                                                                                        (4.877)          
-                                                                                                         
-SUPPORT3attend church or religious ceremony never or less than 1 per year              15.208***         
-                                                                                        (3.995)          
-                                                                                                         
-SUPPORT31 to 3 per year                                                                10.878***         
-                                                                                        (4.032)          
-                                                                                                         
-SUPPORT34 to 11 per year                                                               12.099***         
-                                                                                        (4.089)          
-                                                                                                         
-SUPPORT312+ times per year                                                              8.184**          
-                                                                                        (4.001)          
-                                                                                                         
-SUPPORT4attend clubs or orgs less than once week                                       30.043***         
-                                                                                        (2.145)          
-                                                                                                         
-SUPPORT41 or 2 per week                                                                39.569***         
-                                                                                        (2.209)          
-                                                                                                         
-SUPPORT43 or 4 per week                                                                34.795***         
-                                                                                        (2.404)          
-                                                                                                         
-SUPPORT1EXPtext on phone w friends or family or neighbors less than once week          16.166***         
-                                                                                        (1.093)          
-                                                                                                         
-SUPPORT1EXP1 or 2 per week                                                             24.452***         
-                                                                                        (1.061)          
-                                                                                                         
-SUPPORT1EXP3 or 4 per week                                                             43.051***         
-                                                                                        (0.961)          
-                                                                                                         
-Constant                                                                                 0.319           
-                                                                                        (0.738)          
-                                                                                                         
----------------------------------------------------------------------------------------------------------
-Observations                                                                            71,152           
-R2                                                                                       0.187           
-Adjusted R2                                                                              0.187           
-=========================================================================================================
-Note:                                                                         *p<0.1; **p<0.05; ***p<0.01
-> stargazer(model_1, type = "text", title = "Regression Results for Mental Health NEEDS, GETS, SATISFIED AND DIFFICULTIES", dep.var.labels = "Income Level", covariate.labels = c("MHLTH NEED", "MHLTH GET", "MHLTH SAT", "MHLTH DIFF"), omit.stat = c("f", "ser"), align = TRUE
-+ 
-+ 
-+ k
-Error: unexpected symbol in:
-"
-k"
+==================================================================================                                                                 
 > stargazer(model_1, type = "text", title = "Regression Results for Mental Health NEEDS, GETS, SATISFIED AND DIFFICULTIES", dep.var.labels = "Income Level", covariate.labels = c("MHLTH NEED", "MHLTH GET", "MHLTH SAT", "MHLTH DIFF"), omit.stat = c("f", "ser"), align = TRUE)
 
 Regression Results for Mental Health NEEDS, GETS, SATISFIED AND DIFFICULTIES
 ================================================================================================
-                                                                         Dependent variable:    
-                                                                     ---------------------------
-                                                                            Income Level        
-------------------------------------------------------------------------------------------------
-MHLTH NEED                                                                   -76.110***         
-                                                                              (10.136)          
-                                                                                                
-MHLTH GET                                                                    -64.244***         
-                                                                              (10.058)          
-                                                                                                
-MHLTH SAT                                                                     26.084***         
-                                                                               (0.591)          
-                                                                                                
-MHLTH DIFF                                                                     -6.754           
-                                                                              (22.811)          
-                                                                                                
-MHLTH_GETsome but not all children                                            -41.909*          
-                                                                              (22.987)          
-                                                                                                
-MHLTH_GETno, none of the children                                              -5.756           
-                                                                              (16.896)          
-                                                                                                
-MHLTH_SATISFDsatisfied with all the mental health treatment they get           31.630*          
-                                                                              (17.641)          
-                                                                                                
-MHLTH_SATISFDsome but not all                                                  20.326           
-                                                                              (17.727)          
-                                                                                                
-MHLTH_SATISFDno, none                                                          23.776           
-                                                                              (18.214)          
-                                                                                                
-MHLTH_DIFFCLTnot difficult to get kids mental health treatment                69.898***         
-                                                                              (16.909)          
-                                                                                                
-MHLTH_DIFFCLTsomewhat difficult                                               90.038***         
-                                                                              (16.930)          
-                                                                                                
-MHLTH_DIFFCLTvery difficult                                                   83.530***         
-                                                                              (16.973)          
-                                                                                                
-MHLTH_DIFFCLTunable to get treatment due to difficulty                        77.190***         
-                                                                              (17.599)          
-                                                                                                
-MHLTH_DIFFCLTdid not try to get                                               80.594***         
-                                                                              (18.903)          
-                                                                                                
-Constant                                                                      70.419***         
-                                                                               (0.286)          
-                                                                                                
-------------------------------------------------------------------------------------------------
-Observations                                                                   71,152           
-R2                                                                              0.035           
-Adjusted R2                                                                     0.035           
-================================================================================================
-Note:                                                                *p<0.1; **p<0.05; ***p<0.01stargazer(model_1, model_2, model_3, model_4, type = "text", title = "Regression Results", dep.var.labels = "Income Level", covariate.labels = c("Mental Health Satisified", "Mental Health Support", "Mental Health Difficult"), omit.stat = c("f", "ser"), align = TRUE)
+stargazer(model_1, model_2, model_3, model_4, type = "text", title = "Regression Results", dep.var.labels = "Income Level", covariate.labels = c("Mental Health Satisified", "Mental Health Support", "Mental Health Difficult"), omit.stat = c("f", "ser"), align = TRUE)
 
 Regression Results
 ======================================================================================================================
-                                                                                        Dependent variable:           
-                                                                              ----------------------------------------
-                                                                                            Income Level              
-                                                                                 (1)        (2)       (3)       (4)   
-----------------------------------------------------------------------------------------------------------------------
-Mental Health Satisified                                                      -76.110***                              
-                                                                               (10.136)                               
-                                                                                                                      
-Mental Health Support                                                         -64.244***                              
-                                                                               (10.058)                               
-                                                                                                                      
-Mental Health Difficult                                                       26.084***                               
-                                                                               (0.591)                                
-                                                                                                                      
-MHLTH_GETall children get the mental health treatment they need                 -6.754                                
-                                                                               (22.811)                               
-                                                                                                                      
-MHLTH_GETsome but not all children                                             -41.909*                               
-                                                                               (22.987)                               
-                                                                                                                      
-MHLTH_GETno, none of the children                                               -5.756                                
-                                                                               (16.896)                               
-                                                                                                                      
-MHLTH_SATISFDsatisfied with all the mental health treatment they get           31.630*                                
-                                                                               (17.641)                               
-                                                                                                                      
-MHLTH_SATISFDsome but not all                                                   20.326                                
-                                                                               (17.727)                               
-                                                                                                                      
-MHLTH_SATISFDno, none                                                           23.776                                
-                                                                               (18.214)                               
-                                                                                                                      
-MHLTH_DIFFCLTnot difficult to get kids mental health treatment                69.898***                               
-                                                                               (16.909)                               
-                                                                                                                      
-MHLTH_DIFFCLTsomewhat difficult                                               90.038***                               
-                                                                               (16.930)                               
-                                                                                                                      
-MHLTH_DIFFCLTvery difficult                                                   83.530***                               
-                                                                               (16.973)                               
-                                                                                                                      
-MHLTH_DIFFCLTunable to get treatment due to difficulty                        77.190***                               
-                                                                               (17.599)                               
-                                                                                                                      
-MHLTH_DIFFCLTdid not try to get                                               80.594***                               
-                                                                               (18.903)                               
-                                                                                                                      
-ANXIOUSno anxiety over past 2 wks                                                        38.166***                    
-                                                                                          (4.053)                     
-                                                                                                                      
-ANXIOUSseveral days anxiety over past 2 wks                                              48.226***                    
-                                                                                          (4.075)                     
-                                                                                                                      
-ANXIOUSmore than half the days anxiety over past 2 wks                                   42.257***                    
-                                                                                          (4.195)                     
-                                                                                                                      
-ANXIOUSnearly every day anxiety                                                          41.227***                    
-                                                                                          (4.273)                     
-                                                                                                                      
-WORRYno worry over past 2 wks                                                            48.534***                    
-                                                                                          (4.019)                     
-                                                                                                                      
-WORRYseveral days worried over past 2 wks                                                31.094***                    
-                                                                                          (4.052)                     
-                                                                                                                      
-WORRYmore than half the days worried over past 2 wks                                     22.779***                    
-                                                                                          (4.210)                     
-                                                                                                                      
-WORRYnearly every day worry                                                              14.717***                    
-                                                                                          (4.284)                     
-                                                                                                                      
-INTERESTno days in past 2 wks with little interest in things                                       48.784***          
-                                                                                                    (4.596)           
-                                                                                                                      
-INTERESTseveral days over past 2 wks                                                               37.431***          
-                                                                                                    (4.625)           
-                                                                                                                      
-INTERESTmore than half the days over past 2 wks                                                    28.491***          
-                                                                                                    (4.770)           
-                                                                                                                      
-INTERESTnearly every day                                                                           23.101***          
-                                                                                                    (4.846)           
-                                                                                                                      
-DOWNno days in past 2 wks feeling depressed                                                        40.557***          
-                                                                                                    (4.583)           
-                                                                                                                      
-DOWNseveral days over past 2 wks                                                                   35.988***          
-                                                                                                    (4.610)           
-                                                                                                                      
-DOWNmore than half the days over past 2 wks                                                        29.047***          
-                                                                                                    (4.770)           
-                                                                                                                      
-DOWNnearly every day                                                                               24.550***          
-                                                                                                    (4.834)           
-                                                                                                                      
-SUPPORT1talk on phone w family friends neighbors less than once week                                           7.493  
-                                                                                                              (4.660) 
-                                                                                                                      
-SUPPORT11 or 2 per week                                                                                        5.504  
-                                                                                                              (4.654) 
-                                                                                                                      
-SUPPORT13 or 4 per week                                                                                       -3.468  
-                                                                                                              (4.661) 
-                                                                                                                      
-SUPPORT15 + per week                                                                                          -8.674* 
-                                                                                                              (4.655) 
-                                                                                                                      
-SUPPORT2get together w friends or family less than once week                                                   5.078  
-                                                                                                              (4.807) 
-                                                                                                                      
-SUPPORT21 or 2 per week                                                                                      13.333***
-                                                                                                              (4.811) 
-                                                                                                                      
-SUPPORT23 or 4 per week                                                                                        6.546  
-                                                                                                              (4.844) 
-                                                                                                                      
-SUPPORT25 + per week                                                                                          -0.909  
-                                                                                                              (4.877) 
-                                                                                                                      
-SUPPORT3attend church or religious ceremony never or less than 1 per year                                    15.208***
-                                                                                                              (3.995) 
-                                                                                                                      
-SUPPORT31 to 3 per year                                                                                      10.878***
-                                                                                                              (4.032) 
-                                                                                                                      
-SUPPORT34 to 11 per year                                                                                     12.099***
-                                                                                                              (4.089) 
-                                                                                                                      
-SUPPORT312+ times per year                                                                                    8.184** 
-                                                                                                              (4.001) 
-                                                                                                                      
-SUPPORT4attend clubs or orgs less than once week                                                             30.043***
-                                                                                                              (2.145) 
-                                                                                                                      
-SUPPORT41 or 2 per week                                                                                      39.569***
-                                                                                                              (2.209) 
-                                                                                                                      
-SUPPORT43 or 4 per week                                                                                      34.795***
-                                                                                                              (2.404) 
-                                                                                                                      
-SUPPORT1EXPtext on phone w friends or family or neighbors less than once week                                16.166***
-                                                                                                              (1.093) 
-                                                                                                                      
-SUPPORT1EXP1 or 2 per week                                                                                   24.452***
-                                                                                                              (1.061) 
-                                                                                                                      
-SUPPORT1EXP3 or 4 per week                                                                                   43.051***
-                                                                                                              (0.961) 
-                                                                                                                      
-Constant                                                                      70.419***    1.063    1.501*     0.319  
-                                                                               (0.286)    (0.835)   (0.827)   (0.738) 
-                                                                                                                      
-----------------------------------------------------------------------------------------------------------------------
-Observations                                                                    71,152    71,152    71,152    71,152  
-R2                                                                              0.035      0.131     0.136     0.187  
-Adjusted R2                                                                     0.035      0.131     0.136     0.187  
-======================================================================================================================
-Note:                                                                                      *p<0.1; **p<0.05; ***p<0.01
-
-
-> df <- data.frame(category = c("NA", "Satisfied", "Some", "None"), values = c(">25k", "25k-34.9k", "35k-49.9k", "50k-74.9k", "75k-99k", "100k-149k", "150k-199k", "<200k"))
-> ggplot(df, aes(x = catergory, y = values)) + geom_bar(stat = "identity", fill = "blue") + labs(title = "Bar Plot", x = "Categories", y = "Values") + theme_minimal()
+        
+ 
 
 
 GRAPHS 
@@ -724,7 +84,7 @@ GRAPHS
 > p_MENTAL + geom_smooth() 
 
  p <- ggplot(data = Household_Pulse_data, mapping = aes(x = Household_Pulse_data$MHLTH_SATISFD, y = Household_Pulse_data$INCOME)) + geom_point() + geom_smooth(method = "lm")
-
+> ggplot(df, aes(x = catergory, y = values)) + geom_bar(stat = "identity", fill = "blue") + labs(title = "Bar Plot", x = "Categories", y = "Values") + theme_minimal()
 
 
 
