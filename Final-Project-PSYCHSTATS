@@ -76,18 +76,10 @@ stargazer(model_1, model_2, model_3, model_4, type = "text", title = "Regression
 Regression Results
 ======================================================================================================================
         
- 
-
-
-GRAPHS 
-> p_MENTAL <-  ggplot(data = Household_Pulse_data, mapping = aes(x = Household_Pulse_data$ANXIOUS, y = Household_Pulse_data$INCOME_midpoint, color = Household_Pulse_data$INCOME_midpoint, fill = Household_Pulse_data$INCOME_midpoint))
-> p_MENTAL + geom_smooth() 
-
- p <- ggplot(data = Household_Pulse_data, mapping = aes(x = Household_Pulse_data$MHLTH_SATISFD, y = Household_Pulse_data$INCOME)) + geom_point() + geom_smooth(method = "lm")
-> ggplot(df, aes(x = catergory, y = values)) + geom_bar(stat = "identity", fill = "blue") + labs(title = "Bar Plot", x = "Categories", y = "Values") + theme_minimal()
 
 
 
+X-TABS 
  xtabs(~Household_Pulse_data$ANXIOUS)
 Household_Pulse_data$ANXIOUS
                                              NA 
@@ -190,8 +182,14 @@ barchart3 <- ggplot(data = Household_Pulse_data, aes(x = Household_Pulse_data$MH
 barchart4 <- ggplot(data = Household_Pulse_data, aes(x = Household_Pulse_data$MHLTH_GET, y = Household_Pulse_data$INCOME_midpoint, fill = Household_Pulse_data$MHLTH_GET)) + 
 +   geom_bar(stat = "identity") + 
 +   labs(title = "Mean Income by Depression Leve", x = "Depression Level", y = "Mean Income") + theme_minimal() 
+ 
+> p_MENTAL <-  ggplot(data = Household_Pulse_data, mapping = aes(x = Household_Pulse_data$ANXIOUS, y = Household_Pulse_data$INCOME_midpoint, color = Household_Pulse_data$INCOME_midpoint, fill = Household_Pulse_data$INCOME_midpoint))
+> p_MENTAL + geom_smooth() 
 
-T-TESTS
+ p <- ggplot(data = Household_Pulse_data, mapping = aes(x = Household_Pulse_data$MHLTH_SATISFD, y = Household_Pulse_data$INCOME)) + geom_point() + geom_smooth(method = "lm")
+> ggplot(df, aes(x = catergory, y = values)) + geom_bar(stat = "identity", fill = "blue") + labs(title = "Bar Plot", x = "Categories", y = "Values") + theme_minimal()T-TESTS
+
+T-TESTS 
 t_test_result <- t.test(INCOME_midpoint ~ ANXIOUS_BINARY, data = Household_Pulse_data) 
 t_test_result1 <- t.test(INCOME_midpoint ~ WORRY_BINARY, data = Household_Pulse_data)
 t_test_result <- t.test(INCOME_midpoint ~ MHLTH_SATISFD_BINARY, data = Household_Pulse_data)
